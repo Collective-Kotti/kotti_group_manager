@@ -36,9 +36,9 @@ def test_add(webtest, root):
 @mark.user('admin')
 def test_edit(webtest, root):
 
-    from kotti_group_manager.resources import CustomContent
+    from kotti_group_manager.resources import GroupPage
 
-    root['cc'] = CustomContent(title=u'Content Title')
+    root['cc'] = GroupPage(title=u'Content Title')
 
     resp = webtest.get('/cc/@@edit')
     form = resp.forms['deform']

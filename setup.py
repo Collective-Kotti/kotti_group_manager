@@ -18,7 +18,8 @@ version = '0.1.0'
 install_requires = [
     'Kotti>=1.0.0',
     'kotti_tinymce',
-    'kotti_controlpanel'
+    'kotti_controlpanel',
+    'kotti_toolkit'
 ]
 
 
@@ -40,7 +41,7 @@ setup(
     author='Kotti developers',
     author_email='kotti@googlegroups.com',
     url='https://github.com/Collective-Kotti/kotti_group_manager',
-    keywords='kotti web cms wcms pylons pyramid sqlalchemy bootstrap',
+    keywords='kotti web cms wcms pylons pyramid sqlalchemy bootstrap group',
     license="BSD-derived (http://www.repoze.org/LICENSE.txt)",
     packages=find_packages(),
     include_package_data=True,

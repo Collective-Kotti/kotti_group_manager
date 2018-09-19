@@ -6,7 +6,8 @@ Created on 2018-09-19
 """
 
 from kotti.interfaces import IDefaultWorkflow
-from kotti.resources import Content
+from kotti.resources import Document
+from kotti.security import get_principals
 from sqlalchemy import Column
 from sqlalchemy import ForeignKey
 from sqlalchemy import Integer
@@ -16,34 +17,28 @@ from zope.interface import implements
 from kotti_group_manager import _
 
 
-class CustomContent(Content):
+class GroupPage(Document):
     """ A custom content type. """
 
     implements(IDefaultWorkflow)
 
-    id = Column(Integer, ForeignKey('contents.id'), primary_key=True)
-    custom_attribute = Column(Unicode(1000))
+    id = Column(Integer, ForeignKey('documents.id'), primary_key=True)
+    group_name = Column(Unicode(100), ForeignKey('principals.name'))
 
-    type_info = Content.type_info.copy(
-        name=u'CustomContent',
-        title=_(u'CustomContent'),
-        add_view=u'add_custom_content',
-        addable_to=[u'Document'],
-        selectable_default_views=[
-            ("alternative-view", _(u"Alternative view")),
-        ],
+    type_info = Document.type_info.copy(
+        name=u'GroupPage',
+        title=_(u'Group Page'),
+        add_view=u'add_group_page',
+        addable_to=[u'Document', u'Content']
     )
 
-    def __init__(self, custom_attribute=None, **kwargs):
-        """ Constructor
-
-        :param custom_attribute: A very custom attribute
-        :type custom_attribute: unicode
-
-        :param **kwargs: Arguments that are passed to the base class(es)
-        :type **kwargs: see :class:`kotti.resources.Content`
-        """
-
-        super(CustomContent, self).__init__(**kwargs)
-
-        self.custom_attribute = custom_attribute
+    @property
+    def group(self):
+        principals = get_principals()
+        group = principals.search(name=self.group_name).first()
+        return group
+    
+    @property
+    def group_id(self):
+        return self.group_name.replace("group:", '')
+        

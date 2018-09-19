@@ -7,4 +7,3 @@ from kotti_group_manager.controlpanel import GroupRulesControlPanel
 
 def populate():
     add_settings(GroupRulesControlPanel)
-

@@ -25,10 +25,10 @@ def kotti_configure(settings):
 
     settings['pyramid.includes'] += ' kotti_group_manager'
     settings['kotti.alembic_dirs'] += ' kotti_group_manager:alembic'
-    # settings['kotti.available_types'] += ' kotti_group_manager.resources.CustomContent'
+    settings['kotti.available_types'] += ' kotti_group_manager.resources.GroupPage'
     settings['kotti.fanstatic.view_needed'] += ' kotti_group_manager.fanstatic.css_and_js'
-    settings['kotti.populators'] += " livewire.populator.populate"
-    # File.type_info.addable_to.append('CustomContent')
+    settings['kotti.populators'] += " kotti_group_manager.populator.populate"
+    File.type_info.addable_to.append('GroupPage')
 
 
 def includeme(config):
@@ -41,5 +41,6 @@ def includeme(config):
 
     config.add_translation_dirs('kotti_group_manager:locale')
     config.add_static_view('static-kotti_group_manager', 'kotti_group_manager:static')
+    config.add_route('find-group', '_group/{group}')
 
     config.scan(__name__)

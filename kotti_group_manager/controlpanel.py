@@ -12,6 +12,8 @@ from kotti_group_manager import _
 def deferred_tag_it_widget(node, kw):
     tagit.need()
     all_tags = get_setting('domains', default=[])
+    if not all_tags:
+        all_tags = []
     available_tags = [tag.encode('utf-8') for tag in all_tags]
     widget = CommaSeparatedListWidget(template='tag_it',
                                       available_tags=available_tags)
@@ -20,11 +22,27 @@ def deferred_tag_it_widget(node, kw):
 
 class GroupRulesSchema(colander.MappingSchema):
     
+    email_domain_as_group = colander.SchemaNode(
+        colander.Boolean(),
+        description=_(u'Check the box above to enable this feature'),
+        widget=deform.widget.CheckboxWidget(),
+        title='Allow groups to be created from email domain',
+        default=False
+    )
+    
     domains = colander.SchemaNode(
         ObjectType(),
         title=_('Black listed Domains'),
         widget=deferred_tag_it_widget,
         missing=[],
+    )
+    
+    group_as_content = colander.SchemaNode(
+        colander.Boolean(),
+        description='Check the box above to enable this feature',
+        widget=deform.widget.CheckboxWidget(),
+        title='Create a page for each group created',
+        default=False
     )
 
 

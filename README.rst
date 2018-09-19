@@ -1,7 +1,15 @@
 kotti_group_manager
-*******************
+************************
 
-This is an extension to Kotti that allows to add foo to your site.
+This is an extension to Kotti that helps admin users to manage groups and users.
+
+Features
+=================
+
+- Allow groups and group pages to be created from email domains of new users if
+  enabled.
+ 
+.. image:: https://preview.ibb.co/frhUUz/Welcome_to_Kotti_Kotti_1.gif
 
 |pypi|_
 |downloads_month|_

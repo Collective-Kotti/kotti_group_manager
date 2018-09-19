@@ -7,14 +7,15 @@
       metal:use-macro="api.macro('kotti:templates/view/master.pt')">
 
   <article metal:fill-slot="content"
-           class="content custom-content-default-view"
-           i18n:domain="kotti_group_manager">
+           class="content group-page-default-view"
+           i18n:domain="livewire">
 
     <h1>${context.title}</h1>
+    <p>${context.group_id}</p>
     <p class="lead">
       ${context.description}
     </p>
-    <div tal:content="structure context.custom_attribute | None"></div>
+    <div tal:content="structure context.body | None"></div>
 
   </article>
 </html>
