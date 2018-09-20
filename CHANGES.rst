@@ -1,6 +1,10 @@
 History
 ===========
 
+0.1.1
+----------------
+- Fixes the no creation and modfication date for the Groups folder.
+
 0.1.0
 ----------------
 

@@ -23,6 +23,8 @@ def create_groups_listing_page():
             name=container_name,
             title=_('Groups'),
             description=_('List groups'),
+            creation_date=datetime.now(),
+            modification_date=datetime.now()
         )
         return listing_page
     return root[container_name]
